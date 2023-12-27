@@ -1,0 +1,42 @@
+#SCD Type 2 Implementation using pyspark
+
+0 : not allow to update
+1 : ovwerwrite 
+2 : history start_date end_date current_flag
+3 : current change previous value
+4 : 2 tables 1.current   2.hist data
+6 : 1+2+3  start_date,end_date,current_flag and previous col value as well.
+
+
+cust.csv
+cid,cname,city
+1,rajesh,pune
+2,rohan,pune 
+
+
+#Program 
+SCD type 2 Implementation :
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+from pyspark.sql.window import Window
+
+spark=SparkSession.builder.appName("Scdtype2").getOrCreate()
+
+#read intial data add re columns
+df=spark.read.format("CSV").option("header","true").option("inferSchema","true").option("delimiter",",")\
+    .load("file:///E:/cust.csv")
+df1=df.withColumn("start_date",date_add(current_date(),-1)).withColumn("end_date",lit('')).withColumn("current_flag",lit('Y'))
+
+#read updated
+df_upd=spark.read.format("CSV").option("header","true").option("inferSchema","true").option("delimiter",",")\
+    .load("file:///E:/cust_upd.csv")
+
+df_upd1=df_upd.withColumn("start_date",current_date()).withColumn("end_date",lit('')).withColumn("current_flag",lit('Y'))
+
+df_res=df1.union(df_upd1)
+df_res1=df_res.withColumn("rn",row_number().over(Window.partitionBy("cid").orderBy(desc("start_date"))))
+df_res2=df_res1.withColumn("current_flag",when(df_res1['rn'] > 1,lit('N')).otherwise(lit('Y'))).drop("rn")
+df_res3=df_res2.withColumn("end_date",lag(df_res2['start_date']).over(Window.partitionBy("cid").orderBy(desc("start_date"))))
+df_res3.show()
+

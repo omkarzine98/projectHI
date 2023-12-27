@@ -1,0 +1,45 @@
+#Git 
+
+Git : Version control Tool
+P4v
+Gitlab
+bit bucket 
+
+
+XYZ (f1)
+|   \      \
+D1   D2   D3
+
+f1
+
+this is f1 file (v1)
+
+this is change file (v2)
+
+==============
+Free 
+Paid 
+
+
+Git commands : 
+
+git init
+git config --global user.name sagar
+git config --global user.name bigdatatraining2021@gmail.com
+
+git clone git@github.com:bigdatatraining2021/projectHI.git
+
+git status
+
+git add --all
+
+git commit -m "removed address and new file f1"
+git push
+
+=======================================
+branch imp 
+checkout 
+git merge
+git rebase 
+======================
+git pull 

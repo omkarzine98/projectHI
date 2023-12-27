@@ -1,0 +1,57 @@
+Mock : 
+
+Python Pandas
+-----------------------
+
+Python Lib - Analyze dataset , clean , transform/manipulate dataset 
+dataset : series , csv 
+most userful - DS 
+many functions
+
+
+pyspark --> read processing 
+
+[10,20,30]
+
+
+1.Series :
+single diamesion array
+
+S=[10,20,30,40]
+
+2.DataFrame
+eid,ename
+1,karan
+2,rohan
+3,rakesh
+
+
+csv : format 
+json : process 
+
+
+python : 
+pycharm : instlled pycharm --> written 
+jupiter : Databricks
+
+Google Colab : google provideing --> Jupiter 
+
+
+2.csv 
+
+eid,ename,did,sal
+1,karan,10,25000
+2,rohan,10,15000
+3,rock,20,65000
+4,peter,20,25000
+5,joe,10,15000
+6,bond,10,55000
+7,nick,30,45000
+
+read_csv 
+
+spark df --> df 
+
+pandas df --> spark df 
+
+===============================================================================

@@ -1,0 +1,88 @@
+
+SRC -----> Processing ----> Analysis
+cust ------> processed ----> cust_details
+100                          100
+2         
+
+insert
+update
+
+full load / bulk load / hist load 
+
+ABC -----------------> process ----------------> DWH (Analysis)
+2000-23                                          cust_details 
+cust
+orders
+
+inserted
+updated 
+7 inserted
+3 updated 
+
+13th Dec'23
+
+
+#CDC - change data capture
+1.query based CDC 
+cust 
+1 to 100 -------------------------------> 100
+5 inserted 
+101....105     select * from cust where cid > 100;
+
+
+df=spark.read.format("JDBC")...option("dbtable","cust").load()
+
+df=spark.read.format("JDBC")...option("query","select * from cust where cid > 100").load()
+
+2 updated 
+cid cnam mob up_date
+100               100.
+
+select * from cust where up_date > '';
+
+2.event based CDC / tool 
+Attunity 
+
+RDBMS oracle (insert/update)
+Attunity
+
+csv/json ---------------> process -----> 
+
+3.Source Team
+
+PROD DB 
+   |
+source team
+   |
+src -----> processing -----> tgt 
+
+===============
+SRC   ----> spark ------> Hive
+RDBMS
+cust 100 -------->         102
+2                          
+
+
+
+#SCD : slowly changing Diamesion : 
+we keep history 
+
+6 type of SCD : 
+Type 0: not allowed any updates 
+Type 1: history will not maintain , overwrite 
+Type 2: history maintained with start date end date and current flag 
+Type 3: history will get maintain current value and previous value 
+Type 4: 2 tables history + realtime data 
+Type 6: 1+2+3
+
+SCD Type 2 : 
+
+pyspark
+
+
+HI 
+
+spark 
+
+
+

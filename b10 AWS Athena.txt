@@ -1,0 +1,60 @@
+#AWS  Athena 
+
+on clould data warehouse tool
+Analysis on that Data 
+sql queries - Analysis
+S3 ----> Athena Analysis 
+Serverless 
+based on query - pay 
+failed - not charge 
+Prestro
+Speed : Faster
+Athena support other tools - Glue , Quicksight 
+
+
+-----------------------
+#limitation 
+index not supported
+large Data ---> complex operation ---> Timeout exception 
+update not suppored 
+S3 - Deep Archive : not analysis 
+Row and Column size : 32 MB  
+1000 more than partitions - timout exception 
+
+=====================================
+Note :
+before creating table make sure you have added bucket for athena logs in setting
+
+
+
+eid,ename,did,sal
+1,Karan,10,25000
+2,Raj,10,35000
+3,Rakesh,20,15000
+4,Mohan,20,65000
+5,Maya,30,25000
+
+
+eid int,ename string,did int,sal int
+
+CREATE EXTERNAL TABLE IF NOT EXISTS `prod`.`emp` (
+  `eid` int,
+  `ename` string,
+  `did` int,
+  `sal` int
+) COMMENT "1mp table data analysis"
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES ('field.delim' = ',')
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://b10project/emp_data/'
+TBLPROPERTIES (
+  'classification' = 'csv',
+  'skip.header.line.count' = '1'
+);
+
+create table with S3 data 
+Create table with crowler
+
+=========================================
+Glue : 
+1.Data Catalog 
